@@ -1,30 +1,27 @@
 package com.suguiming.myweex_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.taobao.weex.IWXRenderListener;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.common.WXRenderStrategy;
-import com.taobao.weex.utils.WXFileUtils;
-import com.taobao.weex.utils.WXViewUtils;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements IWXRenderListener {
 
     WXSDKInstance mWXSDKInstance;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        setContentView(R.layout.activity_main);
 
-        String url = "http://192.168.12.109:8081/weex_tmp/h5_render/index.js";
-
+        String url = "http://192.168.12.110:8081/weex_tmp/h5_render/index.js";
         mWXSDKInstance = new WXSDKInstance(this);
         mWXSDKInstance.registerRenderListener(this);
 
@@ -33,6 +30,11 @@ public class MainActivity extends AppCompatActivity implements IWXRenderListener
 
         //2.读本地js
         //mWXSDKInstance.render("WXSample", WXFileUtils.loadFileContent("hello.js", this), null, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
+    }
+
+    public void tap(View v){
+        Intent i = new Intent(this,TestActivity.class);
+        startActivity(i);
     }
 
 

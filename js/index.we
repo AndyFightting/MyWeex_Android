@@ -1,60 +1,73 @@
 <template>
-  <div style="flex-direction: column;">
-    <slider class="slider" interval="{{intervalValue}}" auto-play="{{isAutoPlay}}" >
-      <div class="slider-pages" repeat="{{itemList}}" onclick="goWeexSite" >
-        <image class="thumb" src="{{pictureUrl}}"></image>
-        <text class="title">{{title}}</text>
-      </div>
-    </slider>
-
-  <div class="container" onclick="goWeexSite" >
-    <div class="cell">
-        <image class="thumb" src="http://t.cn/RGE3AJt"></image>
-        <text class="title">JavaScript</text>
+    <div>
+     <wxc-navpage height = 0>
+        <wxc-tabbar tab-items="{{tabItems}}"></wxc-tabbar>
+     </wxc-navpage>
     </div>
-    <div class="cell">
-        <image class="thumb" src="http://t.cn/RGE3uo9"></image>
-        <text class="title">Java</text>
-    </div>
-    <div class="cell">
-        <image class="thumb" src="http://t.cn/RGE31hq"></image>
-        <text class="title">Objective C</text>
-    </div>
-  </div>
 </template>
 
-<style>
-  .cell { margin-top:10 ; margin-left:10 ; flex-direction: row; }
-  .thumb { width: 200; height: 200; }
-  .title { text-align: center ; flex: 1; color: grey; font-size: 50; }
-  .slider {
-    margin: 18;
-    width: 714;
-    height: 230;
-  }
-  .slider-pages {
-    flex-direction: row;
-    width: 714;
-    height: 200;
-  }
-</style>
-
 <script>
-module.exports = {
-    data: {
-      intervalValue:"1000",
-      isShowIndicators:"true",
-      isAutoPlay:"true",
-      itemList: [
-        {title: 'Java', pictureUrl: 'http://t.cn/RGE3uo9'},
-        {title: 'Objective C', pictureUrl: 'http://t.cn/RGE31hq'},
-        {title: 'JavaScript', pictureUrl: 'http://t.cn/RGE3AJt'}
-      ]
-    },
-    methods: {
-      goWeexSite: function () {
-        this.$openURL('http://alibaba.github.io/weex/')
-      }
+    var host = require('./host.js').url;
+
+    var tab_wx = host + "tab_wx.js";
+    var tab_txl = host + "tab_txl.js";
+    var tab_fx  = host + "tab_fx.js";
+    var tab_wo = host + "tab_wo.js";
+
+    require('weex-components');
+    module.exports = {
+        data: {
+
+            tabItems: [
+                {
+                    index: 0,
+                    title: '微信',
+                    titleColor: '#000000',
+                    icon: '',
+                    image: host+'images/icon4.png',
+                    selectedImage: host + 'images/icon5.png',
+                    src: tab_wx,
+                    visibility: 'visible',
+                },
+                {
+                    index: 1,
+                    title: '通讯录',
+                    titleColor: '#000000',
+                    icon: '',
+                    image: host+'images/icon6.png',
+                    selectedImage: host+'images/icon7.png',
+                    src: tab_txl,
+                    visibility: 'hidden',
+                },
+                {
+                    index: 2,
+                    title: '发现',
+                    titleColor: '#000000',
+                    icon: '',
+                    image: host+'images/icon8.png',
+                    selectedImage: host+'images/icon9.png',
+                    src: tab_fx,
+                    visibility: 'hidden',
+                },
+                {
+                    index: 3,
+                    title: '我',
+                    titleColor: '#000000',
+                    icon: '',
+                    image: host+'images/icon10.png',
+                    selectedImage: host+'images/icon11.png',
+                    src: tab_wo,
+                    visibility: 'hidden',
+                }
+            ],
+        },
+        created: function () {
+            var vm = this;
+            vm.$on('tabBar.onClick', function (e) {
+                var detail = e.detail;
+                console.log('tabBar.onClick ' + detail.index);
+            });
+        },
+        methods: {}
     }
-}
 </script>
