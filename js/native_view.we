@@ -1,0 +1,7 @@
+<template>
+  <div>
+  <text>上面</text>
+  <my_view title = "这是从we传到Native里的" style = "flex:1"></my_view>
+   <text>下面</text>
+</div>
+</template>

@@ -1,4 +1,4 @@
-package com.suguiming.myweex_android;
+package com.suguiming.myweex_android.extent;
 
 /**
  * Created by suguiming on 16/12/23.
@@ -16,12 +16,8 @@ import com.taobao.weex.dom.WXImageQuality;
 
 public class ImageAdapter implements IWXImgLoaderAdapter {
 
-    public ImageAdapter() {
-    }
-
     @Override
-    public void setImage(final String url, final ImageView view,
-                         WXImageQuality quality, WXImageStrategy strategy) {
+    public void setImage(final String url, final ImageView view,WXImageQuality quality, WXImageStrategy strategy) {
 
         WXSDKManager.getInstance().postOnUiThread(new Runnable() {
 
